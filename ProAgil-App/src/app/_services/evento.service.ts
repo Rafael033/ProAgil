@@ -25,7 +25,18 @@ getEventoByTema(tema: string): Observable<Evento[]>{
 getEventoById(id: number): Observable<Evento>{
 
   return this.http.get<Evento>('${this.baseURl}/${id}');
+}
+postEvento(evento: Evento) {
+  return this.http.post(this.baseURl, evento);
+}
 
+putEvento(evento: Evento) {
+  return this.http.put(`${this.baseURl}/${evento.id}`, evento);
+}
+
+deleteEvento(id: number) {
+  return this.http.delete(`${this.baseURl}/${id}`);
+// return this.http.delete('http://localhost:5020/api/evento/4'); teste meu
 }
 
 }

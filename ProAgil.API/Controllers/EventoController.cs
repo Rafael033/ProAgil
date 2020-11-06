@@ -95,7 +95,7 @@ namespace ProAgil.API.Controllers
         return BadRequest();
   //     return Ok(_context.Eventos.ToList());
     }
-     [HttpPut] //update Atualiza infomaçoes
+     [HttpPut("{EventoId}")] //update Atualiza infomaçoes
     public async Task<IActionResult> Put(int EventoId, Evento model) //Task para chamadas sincronas 
     {
         try
@@ -122,29 +122,27 @@ namespace ProAgil.API.Controllers
   //     return Ok(_context.Eventos.ToList());
     }
 
- [HttpDelete] // deleta informações  
-    public async Task<IActionResult> Delete(int EventoId) //Task para chamadas sincronas 
-    {
-        try
+ [HttpDelete("{EventoId}")] // deleta informações  
+ public async Task<IActionResult> Delete(int EventoId) // para chamadas sincronas
         {
+            try
+            {
+                 var evento = await _repo.GetAllEventoAsyncById (EventoId, false);
+                if (evento == null) return NotFound();
+               
+                _repo.delete(evento);
 
-            var evento = await _repo.GetAllEventoAsyncById (EventoId, false);
-            if(evento == null) return NotFound();
-           _repo.delete(evento);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Ok();
+                }
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados Peidou");
+            }
 
-           if( await _repo.SaveChangesAsync()){
-               return Ok();
-           }
-
-            
-        }
-        catch (System.Exception)
-        {
-            
-           return this.StatusCode(StatusCodes.Status500InternalServerError,"Banco de dados Falhou");
-        }
-
-        return BadRequest();
+            return BadRequest();
   //     return Ok(_context.Eventos.ToList());
     }
 
