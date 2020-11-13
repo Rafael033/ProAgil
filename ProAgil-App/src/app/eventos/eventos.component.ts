@@ -19,7 +19,8 @@ import { ToastrService } from 'ngx-toastr';
   providers:   [EventoService]
 })
 export class EventosComponent implements OnInit {
-  eventosFiltrados: Evento[];
+   titulo = 'Eventos';
+   eventosFiltrados: Evento[];
    eventos: Evento[] ;
    modoSalvar = 'post';
    evento: Evento ;

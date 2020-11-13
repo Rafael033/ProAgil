@@ -16,14 +16,23 @@ import { EventoService } from './_services/evento.service';
 
 import { DateTimeFormatBrPipe } from './_helps/DateTimeFormatBr.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
+import { TituloComponent } from './_compartilhada/titulo/titulo.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-      EventosComponent,
       NavComponent,
-      DateTimeFormatBrPipe
+      EventosComponent,
+      PalestrantesComponent,
+      DashboardComponent,
+      ContatosComponent,
+      DateTimeFormatBrPipe,
+      TituloComponent
    ],
   imports: [
     BrowserModule,
